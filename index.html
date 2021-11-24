@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Film Finder</title>
+	<link rel="stylesheet" href="style.css"/>
+	<script type="text/javascript" src="script.js"></script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+	<header>
+		<h1>The Film Finder</h1>
+		<p>Unsure what to watch? You've come to the right app.</p>
+	</header>
+	<main>
+		<section id="watched-posters">
+		</section>
+		<section id="watched-form">
+			<h3>What have you watched?</h3>
+			<p>Input any five films. Any at all. The below are just for inspiration...</p>
+			<form id="form-input">
+				<label for="film-input">Films </label>
+				<input type="text" name="input" id="input" placeholder="Enter Film Here" />
+				<input type="submit" value="Watched">
+				<h4>Films entered = <span id="input-counter">0</span></h4>
+			</form>
+			<button id="get-recs">Click...<br>Your Future Awaits</button>
+		</section>
+		<section id="rec-posters">
+		</section>
+		<section id="default-posters">
+		</section>
+	</main>
+	<footer>
+		<p>This product uses the TMDB API but is not endorsed or certified by TMDB</p>
+		<img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_long_2-9665a76b1ae401a510ec1e0ca40ddcb3b0cfe45f1d51b77a308fea0845885648.svg" width="15%"/>
+	</footer>
+</body>
+</html>
