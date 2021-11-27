@@ -6,12 +6,13 @@ body {
 
 header {
 	text-align: center;
-	padding: 10px;
 }
 
 header h1 {
 	letter-spacing: 15px;
 	text-transform: uppercase;
+	padding: 10px;
+
 }
 
 .film-result {
@@ -39,9 +40,14 @@ header h1 {
 	width: 20%;
 }
 
-#default-posters .film-poster {
+#default-posters .film-poster{
 	width: 10%;
 }
+
+#watched-posters .film-poster {
+	width: 10%;
+}
+
 
 
 button#get-recs, button#reset {

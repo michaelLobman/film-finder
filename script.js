@@ -68,6 +68,9 @@ function fetchValue (e) {
 
 function renderResult (e) {
 
+	document.getElementById("default-posters").innerHTML = '';
+
+
 	document.getElementById("form-input").reset();
 	document.getElementById("auto-list").innerHTML = '';
 
