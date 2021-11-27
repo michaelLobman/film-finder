@@ -17,15 +17,14 @@
 		<section id="watched-posters">
 		</section>
 		<section id="watched-form">
-			<h3>What have you watched?</h3>
-			<p>Input any five films. Any at all. The below are just for inspiration...</p>
-			<form autocomplete="off" id="form-input">
-				<label for="film-input">Films </label>
-				<input type="text" name="input" id="input" placeholder="Enter Film Here" />
-				<input type="submit" value="Watched">
+			<h3>Enter Five Films for Recommendations</h3>
+			<form autocomplete="off" id="form-input" action="/action_page.php">
+				<input type="text" name="input" id="input" placeholder="Enter Film Here" required />
+				<div id="auto-list">
+				</div>
 				<h4>Films entered = <span id="input-counter">0</span></h4>
 			</form>
-			<button id="get-recs">Click...<br>Your Future Awaits</button>
+			<button id="get-recs">Get Recommendations</button>
 		</section>
 		<section id="rec-posters">
 		</section>

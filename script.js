@@ -1,30 +1,104 @@
 document.addEventListener("DOMContentLoaded", renderPage);
 
-function renderPage(){
-	fetchPosters();
-	formListener();
-	recListener();
-	clearListener();
-
-}
 // const watchedArray = [];
 const arrayAgainst = [];
 
+function renderPage(){
+	fetchPosters();
+	recListener();
+	clearListener();
+	inputListener();
+
+}
+
+// Input Listener for Auto Complete
+
+function inputListener () {
+	const input = document.getElementById("input");
+
+	input.addEventListener("input", fetchValue)
+
+}
+
+function fetchValue (e) {
+
+	const autoList = document.getElementById("auto-list");
 
 
-function fetchPosters(){
-	fetch("https://api.themoviedb.org/4/list/7114170?api_key=b0b77ea6cc2033f31116d4ef4f5925a6")
-	.then(resp => resp.json())
-	.then(data => {
 
-		const filmArray = data["results"];
-		const defaultContainer = document.getElementById("default-posters");
+	if (e.target.value.length === 0) {
+		autoList.innerHTML = "";
 
-		for (const film of filmArray) {
-			renderPosters(film, defaultContainer)
-		}
-	})
-}	
+		e.target.reset()
+
+	}
+
+	else if (e.target.value.length > 2){
+
+		fetch(`https://api.themoviedb.org/3/search/movie?api_key=b0b77ea6cc2033f31116d4ef4f5925a6&query="${e.target.value}"`)
+		.then(resp => resp.json())
+		.then(data => {
+
+
+			const autoList = document.getElementById("auto-list");
+
+			autoList.innerHTML = "";
+
+
+			console.log(data["results"]);
+			const autoArray = data["results"].slice(0, 5);
+			console.log(autoArray)
+
+			for (const film of autoArray) {
+
+				const filmResult = document.createElement("img");
+				filmResult.className = "film-result";
+				filmResult.id = film["id"]
+
+				filmResult.src = `${"https://www.themoviedb.org/t/p/original" + film["poster_path"]}`
+
+
+				autoList.append(filmResult);
+
+
+				filmResult.addEventListener('click', renderResult)
+			}
+		})
+	}
+}
+
+function renderResult (e) {
+
+	console.log(e.target)
+	console.log(e.target.src) 
+	console.log(e.target.id);
+
+	document.getElementById("form-input").reset();
+	document.getElementById("auto-list").innerHTML = '';
+
+	const counter = document.getElementById('input-counter');
+
+	if (counter.textContent < 5) {
+		const inputContainer = document.getElementById('watched-posters');
+
+		const resultCard = document.createElement('img');
+		resultCard.src = e.target.src
+		resultCard.className = "film-poster";
+		inputContainer.append(resultCard); 
+		resultCard.addEventListener('click', removeCard);
+		arrayAgainst.push(e.target.id);
+		counter.textContent++
+
+		showButton();
+
+
+
+	} else { 
+		counter.textContent = "You have already entered five films"
+	}
+
+	
+}
 
 function renderPosters(film, container) {
 	const newCard = document.createElement('img');
@@ -42,38 +116,47 @@ function renderPosters(film, container) {
 	}
 }
 
-function removeCard(e) {
-	e.target.remove();
-	const counter = document.getElementById('input-counter');
-	counter.textContent--
-}
 
-function formListener(){
-	const filmForm = document.getElementById('form-input');
-	filmForm.addEventListener('submit', fetchInput);
-}
+/*
 
-function fetchInput(e){
-	e.preventDefault();
-	const input = e.target.children[1].value;
-	fetch(`https://api.themoviedb.org/3/search/movie?api_key=b0b77ea6cc2033f31116d4ef4f5925a6&query="${input}"`)
+// just in case we need to backtrack
+
+function renderResult (e) {
+
+	console.log(e.target)
+	console.log(e.target.src)
+
+	document.getElementById("form-input").reset();
+
+	document.getElementById("auto-list").innerHTML = '';
+
+	// const watchedContainer = document.getElementById("watched-posters")
+
+	// document.getElementById("input").value = e.target.textContent
+	// renderPosters(listId, watchedContainer)
+
+	fetch(`https://api.themoviedb.org/3/movie/${e.target.id}?api_key=b0b77ea6cc2033f31116d4ef4f5925a6&language=en-US`)
+
 	.then(resp => resp.json())
-	.then(data => {
+	.then(film => {
+
 		const counter = document.getElementById('input-counter');
+
+		console.log(film)
 		if (counter.textContent < 5) {
-			console.log(data["results"][0])
-			const inputFilm = data["results"][0];
 			const inputContainer = document.getElementById('watched-posters');
-			renderPosters(inputFilm, inputContainer);
+			renderPosters(film, inputContainer);
 			// watchedArray.push(inputFilm);
 			// watchedArray.push(inputFilm["id"]);
 
 			//this is quite repetivie code. there's a way
 			// to copy the array... but maybe we can use the same
 			// array... right now just trying to have some fix
-			arrayAgainst.push(inputFilm["id"]);
+			arrayAgainst.push(film["id"]);
 
 			counter.textContent++
+
+			showButton();
 
 
 
@@ -81,10 +164,117 @@ function fetchInput(e){
 			counter.textContent = "You have already entered five films"
 		}
 
-		e.target.reset();
+		//e.parentElement.parentElement.reset();
 		
 	})
+
+
+		
 }
+
+
+function renderPosters(film, container) {
+	const newCard = document.createElement('img');
+	newCard.src = `${"https://www.themoviedb.org/t/p/original" + film["poster_path"]}`
+	newCard.className = "film-poster";
+	container.append(newCard); 
+
+	console.log(newCard.parentElement);
+
+	const counter = document.getElementById('input-counter');
+	const watchedContainer = document.getElementById("watched-posters");
+
+	if (container === watchedContainer) {
+		newCard.addEventListener('click', removeCard);
+	}
+}
+
+*/
+
+
+// show the button when film count equals five
+
+function showButton() {
+	const recButton = document.getElementById("get-recs");
+	const counter = document.getElementById("input-counter");
+
+	if (counter.textContent === '5') {
+
+		recButton.style.display = 'inline';
+
+
+
+	}
+}
+
+
+
+function fetchPosters(){
+	fetch("https://api.themoviedb.org/4/list/7114170?api_key=b0b77ea6cc2033f31116d4ef4f5925a6")
+	.then(resp => resp.json())
+	.then(data => {
+
+		const filmArray = data["results"];
+		const defaultContainer = document.getElementById("default-posters");
+
+		for (const film of filmArray) {
+			renderPosters(film, defaultContainer)
+		}
+	})
+}	
+
+
+
+
+function removeCard(e) {
+	e.target.remove();
+	const counter = document.getElementById('input-counter');
+	counter.textContent--
+}
+
+// function formListener(){
+// 	const filmForm = document.getElementById('form-input');
+// 	filmForm.addEventListener('submit', fetchInput);
+// }
+
+
+// this is what need to change...
+
+// function fetchInput(e){
+// 	e.preventDefault();
+// 	const input = document.getElementById("input").value
+
+// 	fetch(`https://api.themoviedb.org/3/search/movie?api_key=b0b77ea6cc2033f31116d4ef4f5925a6&query="${input}"`)
+// 	.then(resp => resp.json())
+// 	.then(data => {
+// 		const counter = document.getElementById('input-counter');
+// 		if (counter.textContent < 5) {
+// 			console.log(data["results"][0])
+// 			const inputFilm = data["results"][0];
+// 			const inputContainer = document.getElementById('watched-posters');
+// 			renderPosters(inputFilm, inputContainer);
+// 			// watchedArray.push(inputFilm);
+// 			// watchedArray.push(inputFilm["id"]);
+
+// 			//this is quite repetivie code. there's a way
+// 			// to copy the array... but maybe we can use the same
+// 			// array... right now just trying to have some fix
+// 			arrayAgainst.push(inputFilm["id"]);
+
+// 			counter.textContent++
+
+// 			showButton();
+
+
+
+// 		} else { 
+// 			counter.textContent = "You have already entered five films"
+// 		}
+
+// 		e.target.reset();
+		
+// 	})
+// }
 
 function recListener(){
 	const recButton = document.getElementById("get-recs");
@@ -116,66 +306,16 @@ function renderUnique (results, container) {
 
 }
 
-
-	// this should have inputs of the entered films and 
-	// the films that are being recommended.
-
-	// let's assume they are going to enter five films
-
-	// and the button shouldn't be avaialbe until they do,
-
-	// so then, for each, film, we need two results.
-
-	// even if they five films are the same, it will keep going
-
-	// down the chain until it gets to the ninth and tenth result,
-
-	// and returns that. so the number that really needs to be counter
-
-	// are the two recs per entered film, and the 10 total films entered into 
-
-	// the array, which begins with the five input films.
-
-
-
-// 	const recContainer = document.getElementById("rec-posters");
-
-// 	let x = 0;
-
-// 	while (x < 2) {
-
-// 		for
-
-
-// 	}
-
-
-// 	for (x = 0; x < 2; x++) {
-
-// 		for (i = 0; i < 10; i++) {
-
-// 			if (arrayAgainst.includes(results[i]["id"])) {
-// 				console.log("already logged");
-
-// 			} else {
-// 				results[i]
-// 				renderPosters(results[i], recContainer)
-// 				recArray.push(results[i]["id"])
-// 				console.log(i);
-// 			}
-
-// 		}
-// 	}
-
-// }
-
-
 function getRecommendations () {
 
 	const recContainer = document.getElementById("rec-posters");
-	document.getElementById("default-posters").innerHTML = ''
+	const recButton = document.getElementById("get-recs");
 
-	// was watchedArray
+	// repetitive
+
+	recButton.style.display = "none";
+
+	document.getElementById("default-posters").innerHTML = ''
 
 	for(const watchedId of arrayAgainst) {
 		fetch(`https://api.themoviedb.org/3/movie/${watchedId}/recommendations?api_key=b0b77ea6cc2033f31116d4ef4f5925a6&language=en-US&page=1`)
@@ -183,64 +323,90 @@ function getRecommendations () {
 		.then(data => {
 
 			const films = data["results"]
-		//	const films = data["results"].slice(0, 2);
 			const containerCounter = recContainer.childElementCount;
 
 			renderUnique(films, recContainer);
-
-			// films.forEach(film => {
-
-			// 	renderPosters(film, recContainer);
-			// 	recArray.push(film["id"]);
-
-			// })
 
 		})
 	}
 	
 }
 
-			// need to write a recursive function
-			// it will check each element if it is already included,
-			// when added it will add to a counter i or j, adding up to two elements
+function clearListener() {
+
+	const reset = document.getElementById("reset");
+	reset.addEventListener('click', resetPage);
+
+}
+
+function resetPage () {
+
+	document.getElementById("watched-posters").innerHTML = '';
+	document.getElementById("rec-posters").innerHTML = '';
+	document.getElementById("default-posters").innerHTML = '';
+	document.getElementById("input-counter").textContent = 0;
+
+	fetchPosters();
 
 
-				/*
+}
 
-				console.log("container count =" + recContainer.childElementCount)
 
-				// this doesnt check second one in
-				// and it doesn't account for the fact that the second element will
-				// 
-
-				for (i = 0; i < 2; i++) {
-
-					if (recArray.includes(results[i]["id"])) {
-
-						renderPosters(results[i+1], recContainer)
-
-						recArray.push(results[i]["id"])
-
-						i++
-
-					} else {
-
-						renderPosters(results[i], recContainer)
-
-						recArray.push(results[i]["id"])
-
-						i++
-
-						
-					}
+// right now, I want to solve the problem of the button
+// for fetching recs - only visible when five are entered,
+// once clicked, it goes away!
+// comes back when reset is pushed!
 
 
 
-				}
 
 
-				})
-				*/
+
+
+
+
+
+
+
+// For the auto complete type feature
+
+
+
+// function completeListener () {
+// 	const form = document.getElementById("form-input");
+// 	form.addEventListener()
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
