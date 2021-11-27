@@ -39,6 +39,10 @@ header h1 {
 	width: 20%;
 }
 
+#default-posters .film-poster {
+	width: 10%;
+}
+
 
 button#get-recs, button#reset {
 	font-size: 20px;
