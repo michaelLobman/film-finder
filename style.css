@@ -36,6 +36,8 @@ header h1 {
 	font-size: 20px;
 }
 
+
+
 .film-poster {
 	width: 20%;
 }
@@ -94,12 +96,17 @@ input[type=text] {
 	border-right: none;
 	font-size: 18px;
 	margin: 10px;
+	text-align: center;
 }
 
 input[type=text]:focus{
 	color: #DF2700;
 	outline: none;
 	border-bottom: solid #DF2700 1px;
+}
+
+input[type=text]:focus::placeholder {
+	color: transparent;
 }
 
 footer {
