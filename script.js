@@ -84,7 +84,7 @@ function renderResult (e) {
 		resultCard.className = "film-poster";
 		inputContainer.append(resultCard); 
 		resultCard.addEventListener('click', removeCard);
-		arrayAgainst.push(e.target.id);
+		arrayAgainst.push(parseInt(e.target.id));
 		counter.textContent++
 
 		showButton();
