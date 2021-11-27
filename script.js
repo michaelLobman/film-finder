@@ -24,6 +24,7 @@ function fetchValue (e) {
 
 	const autoList = document.getElementById("auto-list");
 
+// below could work
 
 
 	if (e.target.value.length === 0) {
@@ -45,9 +46,7 @@ function fetchValue (e) {
 			autoList.innerHTML = "";
 
 
-			console.log(data["results"]);
 			const autoArray = data["results"].slice(0, 5);
-			console.log(autoArray)
 
 			for (const film of autoArray) {
 
@@ -68,10 +67,6 @@ function fetchValue (e) {
 }
 
 function renderResult (e) {
-
-	console.log(e.target)
-	console.log(e.target.src) 
-	console.log(e.target.id);
 
 	document.getElementById("form-input").reset();
 	document.getElementById("auto-list").innerHTML = '';
@@ -105,8 +100,6 @@ function renderPosters(film, container) {
 	newCard.src = `${"https://www.themoviedb.org/t/p/original" + film["poster_path"]}`
 	newCard.className = "film-poster";
 	container.append(newCard); 
-
-	console.log(newCard.parentElement);
 
 	const counter = document.getElementById('input-counter');
 	const watchedContainer = document.getElementById("watched-posters");
@@ -289,7 +282,6 @@ function renderUnique (results, container) {
 	while (x < 2) {
 
 		if (arrayAgainst.includes(results[i]["id"])) {
-			console.log("already logged");
 
 			i++
 
@@ -301,8 +293,6 @@ function renderUnique (results, container) {
 			i++
 		}
 	}
-
-	console.log(arrayAgainst);
 
 }
 
