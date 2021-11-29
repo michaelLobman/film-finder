@@ -9,7 +9,8 @@ header {
 }
 
 header h1 {
-	letter-spacing: 15px;
+	letter-spacing: 2vw;
+	font-size: 3vw;
 	text-transform: uppercase;
 	padding: 10px;
 
@@ -33,7 +34,8 @@ header h1 {
 
 #watched-form {
 	text-align: center;
-	font-size: 20px;
+	font-size: 1.5vw;
+	letter-spacing: .3vw;
 }
 
 
@@ -53,7 +55,8 @@ header h1 {
 
 
 button#get-recs, button#reset {
-	font-size: 20px;
+	font-size: 1.5vw;
+	letter-spacing: .6vw;
 	padding: 10px;
 	margin-bottom: 20px;
 	border-radius: 10px;
@@ -87,14 +90,15 @@ button#reset {
 }
 
 input[type=text] {
-	width: 20%;
+	font-size: 2vw;
+	letter-spacing: .5vw;
+	width: 30%;
 	background-color: #1F1F1F;
 	color: #EDEDED;
 	font-family: 'M PLUS 1', sans-serif;
 	padding: 10px;
 	border-bottom: solid #EDEDED 1px;
 	border-right: none;
-	font-size: 18px;
 	margin: 10px;
 	text-align: center;
 }
@@ -110,6 +114,8 @@ input[type=text]:focus::placeholder {
 }
 
 footer {
+	font-size: .8vw;
+	letter-spacing: .1vw;
 	text-align: center;
 	padding: 10px;
 }
