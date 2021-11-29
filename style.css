@@ -68,11 +68,11 @@ button#get-recs, button#reset {
 }
 
 button#reset {
-	width: 150px;
+	width: 10vw;
 }
 
 button#get-recs {
-	width: 250px;
+	width: 30vw;
 	display: none;
 
 }
