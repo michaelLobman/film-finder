@@ -99,6 +99,8 @@ input[type=text] {
 	padding: 10px;
 	border-bottom: solid #EDEDED 1px;
 	border-right: none;
+	border-left: none;
+	border-top: none;
 	margin: 10px;
 	text-align: center;
 }
