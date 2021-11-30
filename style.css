@@ -22,13 +22,11 @@ header h1 {
 
 }
 
-
 #auto-list {
 	width: 65%;
 	text-align: center;
 	margin: auto;
 	cursor: pointer;
-
 }
 
 
@@ -52,8 +50,6 @@ header h1 {
 	width: 10%;
 }
 
-
-
 button#get-recs, button#reset {
 	font-size: 1.5vw;
 	letter-spacing: .6vw;
@@ -74,15 +70,12 @@ button#reset {
 button#get-recs {
 	width: 30vw;
 	display: none;
-
 }
-
 
 button#reset {
 	text-align: center;
 	margin: 10px auto;
 	display: block;
-
 }
 
 #input-counter {
