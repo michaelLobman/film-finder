@@ -110,15 +110,21 @@ function fetchValue (e) {
 
 				const filmResult = document.createElement("img");
 				filmResult.className = "film-result";
-				filmResult.id = film["id"]
+				filmResult.id = film["id"];
 
 				filmResult.src = `${"https://www.themoviedb.org/t/p/original" + film["poster_path"]}`
 
+				if (filmResult.src.includes("null")) {
 
-				autoList.append(filmResult);
+					return 
 
+				} else {
 
-				filmResult.addEventListener('click', renderResult)
+					autoList.append(filmResult);
+					filmResult.addEventListener('click', renderResult)
+
+				}
+			
 			}
 		})
 	}
@@ -133,7 +139,10 @@ function renderResult (e) {
 
 	const counter = document.getElementById('input-counter');
 
-	if (counter.textContent < 5) {
+	if (arrayAgainst.includes(parseInt(e.target.id))) {
+		alert("You have already entered this film.")
+
+	} else if (counter.textContent < 5) {
 		const inputContainer = document.getElementById('watched-posters');
 
 		const resultCard = document.createElement('img');
