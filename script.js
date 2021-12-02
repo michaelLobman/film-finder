@@ -140,7 +140,6 @@ function renderResult (e) {
 		resultCard.src = e.target.src
 		resultCard.className = "film-poster";
 		inputContainer.append(resultCard); 
-		resultCard.addEventListener('click', removeCard);
 		arrayAgainst.push(parseInt(e.target.id));
 		counter.textContent++
 
@@ -149,13 +148,6 @@ function renderResult (e) {
 	} else { 
 		counter.textContent = "You have already entered five films"
 	}
-}
-
-
-function removeCard(e) {
-	e.target.remove();
-	const counter = document.getElementById('input-counter');
-	counter.textContent--
 }
 
 

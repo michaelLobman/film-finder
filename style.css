@@ -10,10 +10,14 @@ header {
 
 header h1 {
 	letter-spacing: 2vw;
-	font-size: 3vw;
+	font-size: 2.5vw;
 	text-transform: uppercase;
-	padding: 10px;
+	padding: .5vw;
 
+}
+
+h3 {
+	font-size: 1.5vw;
 }
 
 .film-result {
@@ -83,7 +87,7 @@ button#reset {
 }
 
 input[type=text] {
-	font-size: 2vw;
+	font-size: 1.5vw;
 	letter-spacing: .5vw;
 	width: 30%;
 	background-color: #1F1F1F;
