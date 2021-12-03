@@ -17,7 +17,7 @@ Turn into .gif then add
 
 Begin by typing your first film into the input form. As you type, the top search results from The Movie Database's API will populate beneath the text area in the form of their repective posters. When your intended film appears, click on its poster to confirm that recommendation.
 
-[Entering first film](/demos/first-film)
+![Entering first film demo](demos/first-film.gif)
 
 Repeat this process until you have entered **5** films, at which time the "Get Recommendations" will appear.
 
