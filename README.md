@@ -23,7 +23,17 @@ Repeat this process until you have entered **5** films, at which time the "Get R
 
 Click the "Get Recommendations" button to generate your **10** recommended films.
 
+![Get recommendations](demos/get-recs.gif)
+
 *Do you like similar movies?* Have no fear! The Film Finder will neither repeat an entry as a recommedation nor will it provide duplicate recommendations. For example, if you enter **5** *Harry Potter* films, your **10** recommendations will include the other **3** films in the series but will not regurgitate your entries. 
+
+## Support
+
+If you have any questions, issues, or just want to chat, you can email me *michael.lobman@gmail.com*. 
+
+## License
+
+The Film Finder uses the TMDB API but is not endorsed or certified by TMDB.
 
 
 
