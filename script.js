@@ -48,7 +48,6 @@ function getRecommendations () {
 		.then(data => {
 
 			const results = data["results"]
-			const containerCounter = recContainer.childElementCount;
 
 			renderUnique(results, recContainer);
 		})
@@ -94,11 +93,12 @@ function fetchValue (e) {
 
 		e.target.reset()
 
-	} else if (e.target.value.length > 2){
+	} else if (e.target.value.length > 0){
 
 		fetch(`https://api.themoviedb.org/3/search/movie?api_key=b0b77ea6cc2033f31116d4ef4f5925a6&query="${e.target.value}"`)
 		.then(resp => resp.json())
 		.then(data => {
+			debugger
 
 			const autoList = document.getElementById("auto-list");
 
