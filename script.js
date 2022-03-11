@@ -60,7 +60,7 @@ function renderUnique (films, container) {
 	let i = 0;
 	let x = 0;
 
-	while (x < 2) {
+	while (x < 0) {
 
 		if (arrayAgainst.includes(films[i]["id"])) {
 
