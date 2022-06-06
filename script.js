@@ -1,5 +1,3 @@
-const arrayAgainst = [];
-
 document.addEventListener("DOMContentLoaded", function () {
 
 	fetchPosters();
@@ -9,19 +7,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
+const arrayAgainst = [];
+
+
+
 function fetchPosters(){
 	fetch("https://api.themoviedb.org/4/list/7114170?api_key=b0b77ea6cc2033f31116d4ef4f5925a6")
 	.then(resp => resp.json())
 	.then(data => {
-
 		const filmArray = data["results"];
 		const defaultContainer = document.getElementById("default-posters");
 
-		filmArray.forEach(film => renderPosters(film, defaultContainer));
+		filmArray.forEach(film => renderPoster(film, defaultContainer));
 	})
 }	
 
-function renderPosters(film, container) {
+function renderPoster(film, container) {
 	const newCard = document.createElement('img');
 	newCard.src = `${"https://www.themoviedb.org/t/p/original" + film["poster_path"]}`
 	newCard.className = "film-poster";
@@ -34,42 +35,32 @@ function recListener(){
 }
 
 function getRecommendations () {
-
 	const recContainer = document.getElementById("rec-posters");
 	const recButton = document.getElementById("get-recs");
 
 	recButton.style.display = "none";
+	document.getElementById("default-posters").innerHTML = '';
 
-	document.getElementById("default-posters").innerHTML = ''
-
-	for(const watchedId of arrayAgainst) {
+	for (const watchedId of arrayAgainst) {
 		fetch(`https://api.themoviedb.org/3/movie/${watchedId}/recommendations?api_key=b0b77ea6cc2033f31116d4ef4f5925a6&language=en-US&page=1`)
 		.then(resp => resp.json())
 		.then(data => {
-
-			const results = data["results"]
-
+			const results = data["results"];
 			renderUnique(results, recContainer);
 		})
 	}	
 }
 
-
 function renderUnique (films, container) {
-
 	let i = 0;
 	let x = 0;
 
 	while (x < 0) {
-
 		if (arrayAgainst.includes(films[i]["id"])) {
-
 			i++
-
 		} else {
-			renderPosters(films[i], container)
+			renderPoster(films[i], container)
 			arrayAgainst.push(films[i]["id"])
-				
 			x++
 			i++
 		}
