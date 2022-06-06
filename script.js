@@ -1,15 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
-
 	fetchPosters();
 	recListener();
 	inputListener();
 	resetListener()
-
 });
 
 const arrayAgainst = [];
-
-
 
 function fetchPosters(){
 	fetch("https://api.themoviedb.org/4/list/7114170?api_key=b0b77ea6cc2033f31116d4ef4f5925a6")
@@ -106,16 +102,11 @@ function fetchValue (e) {
 				filmResult.src = `${"https://www.themoviedb.org/t/p/original" + film["poster_path"]}`
 
 				if (filmResult.src.includes("null")) {
-
 					return 
-
 				} else {
-
 					autoList.append(filmResult);
 					filmResult.addEventListener('click', renderResult)
-
 				}
-			
 			}
 		})
 	}
@@ -135,7 +126,6 @@ function renderResult (e) {
 
 	} else if (counter.textContent < 5) {
 		const inputContainer = document.getElementById('watched-posters');
-
 		const resultCard = document.createElement('img');
 		resultCard.src = e.target.src
 		resultCard.className = "film-poster";
@@ -156,15 +146,12 @@ function showButton() {
 	const counter = document.getElementById("input-counter");
 
 	if (counter.textContent === '5') {
-
 		recButton.style.display = 'inline';
 	}
 }
 
 
 function resetListener() {
-
 	const reset = document.getElementById("reset");
 	reset.addEventListener('click', (() => location.reload()));
-
 }
