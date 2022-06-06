@@ -30,7 +30,7 @@ function recListener(){
 	recButton.addEventListener('click', getRecommendations);
 }
 
-function getRecommendations () {
+function getRecommendations() {
 	const recContainer = document.getElementById("rec-posters");
 	const recButton = document.getElementById("get-recs");
 
@@ -50,8 +50,7 @@ function getRecommendations () {
 function renderUnique (films, container) {
 	let i = 0;
 	let x = 0;
-
-	while (x < 0) {
+	while (x < 2) {
 		if (arrayAgainst.includes(films[i]["id"])) {
 			i++
 		} else {
@@ -78,15 +77,13 @@ function fetchValue (e) {
 	if (e.target.value.length === 0) {
 		autoList.innerHTML = "";
 
-		e.target.reset()
+		// e.target.reset()
 
 	} else if (e.target.value.length > 0){
 
 		fetch(`https://api.themoviedb.org/3/search/movie?api_key=b0b77ea6cc2033f31116d4ef4f5925a6&query="${e.target.value}"`)
 		.then(resp => resp.json())
 		.then(data => {
-			debugger
-
 			const autoList = document.getElementById("auto-list");
 
 			autoList.innerHTML = "";
