@@ -38,6 +38,8 @@ function getRecommendations() {
 	document.getElementById("default-posters").innerHTML = '';
 	document.getElementById("watched-form").innerHTML = '';
 
+	document.getElementById("film-finder-h1").textContent = "Recommendations:";
+
 	for (const watchedId of arrayAgainst) {
 		fetch(`https://api.themoviedb.org/3/movie/${watchedId}/recommendations?api_key=b0b77ea6cc2033f31116d4ef4f5925a6&language=en-US&page=1`)
 		.then(resp => resp.json())
